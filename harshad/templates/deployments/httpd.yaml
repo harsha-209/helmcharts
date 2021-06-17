@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+
+kind: Deployment 
+
+metadata: 
+
+  name: {{ .Values.httpd.name }} 
+
+spec: 
+
+  selector: 
+
+    matchLabels: 
+
+      app: {{ .Values.httpd.name }} 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: {{ .Values.httpd.name }} 
+
+    spec: 
+
+      containers: 
+
+      - name: myapp 
+
+        image: {{ .Values.httpd.image }} # Image name alone with tag 
+
+        resources: 
+
+          limits: 
+
+            memory: "128Mi" 
+
+            cpu: "150m" 
+
+        ports: 
+
+        - containerPort: {{ .Values.httpd.port }} 

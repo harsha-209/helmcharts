@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+
+kind: Deployment 
+
+metadata: 
+
+  name: {{ .Values.nginx.name }} 
+
+spec: 
+
+  selector: 
+
+    matchLabels: 
+
+      app: {{ .Values.nginx.name }} 
+
+  template: 
+
+    metadata: 
+
+      labels: 
+
+        app: {{ .Values.nginx.name }} 
+
+    spec: 
+
+      containers: 
+
+      - name: myapp 
+
+        image: {{ .Values.nginx.image }} # Image name alone with tag 
+
+        resources: 
+
+          limits: 
+
+            memory: "128Mi" 
+
+            cpu: "150m" 
+
+        ports: 
+
+        - containerPort: {{ .Values.nginx.port }} 
